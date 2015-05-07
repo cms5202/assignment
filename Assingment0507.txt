@@ -1,0 +1,139 @@
+-----------------------HTML-----------------------
+버튼
+<input type="submit" value="전송">
+
+입력 text
+<input type="text" name = "name">
+
+암호 입력
+<input type="password" name = "pwd">
+
+라디오 버튼
+<input type="radio" id="gender" name="gender" value = 남자 checked>
+<input type="radio" id="gender" name="gender" value = 여자>
+
+택스트 입력창
+<textarea id="content" name="content" rows="3" cols="35"></textarea>
+
+체크박스
+<input type="checkbox" name="item" value="신발">
+<input type="checkbox" name="item" value="가방">
+<input type="checkbox" name="item" value="모자">
+
+목록상자
+<select id="job" name="job" size="5">
+	<option value="">선택하세요</option>
+	<option value="학생">학생</option>
+	<option value="공무원">공무원</option>
+	<option value="군인">군인</option>
+</select>
+
+-----------------------VO-----------------------
+VO객채를 통해서 필요한 데이터를 묶어서 전달
+VO Class에 필요한 변수를 전부 선언하고 getter setter, toString 만듬
+
+
+-----------------------DAO-----------------------
+DAO에는  필요한 메소드만 구현(DB와 연동 구현)
+
+
+-----------------------JSP-----------------------
+JSP : HTML코드에 Java코드를 넣는 방식 -> Sublet으로 자동 변경됨.
+	파일명으로만 참조
+	jsp에서는 vo에 넘겨줄 값 세팅 => request.getParameter( )
+	vo생성하고 request.getParameter( )에서 받아온 값 넣어줌
+	vo를 dao에 넘겨줌
+
+*JSP에 Java 코드 입력하기
+<%
+	int num1 = 20;
+	int num2 = 10;
+%>
+
+*JSP에 전역변수 선언하기
+<%!
+	String str="안녕하세요!";
+	int a = 5;
+%>
+
+*JSP에서 값 출력하기
+<%= 변수 %>
+<%= 수식 %>
+<%= 메소드 호출 %>
+
+*JSP 주석문
+<!-- 주석문 -->
+
+*JSP 지시자
+<%@page import="java.util.Calender"%>
+
+
+-----------------------Servlet-----------------------
+Servlet : Java코드 안에 HTML 코드를 넣는 방식
+	 Servlet을 이용해 DAO에 접근
+	 어노테이션과 web.xml이용해 참조
+
+
+
+1.어노테이션을 이용한 참조 방법
+ex)
+@WebServlet("/UpdateBoard")
+
+2.web.xml 참조방법
+ex)
+  <servlet>
+    <servlet-name>addBoard</servlet-name>
+    <servlet-class>com.samsung.view.board.AddBoard</servlet-class>  <-Ctrl키 눌러서 확인해봐야함
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addBoard</servlet-name>
+    <url-pattern>/addBoard</url-pattern>
+  </servlet-mapping>
+
+*Servlet에서 한글이 깨지지 않게 하기 위한 방법
+1.get 방식일 경우,
+서버 설정 파일인 server.xml 파일에서 첫 번째 등장하는 <Connector> 태그를 찾아서
+URIEncoding 속성을 추가해야 합니다.
+
+2.post 방식일 경우,
+request.setCharacterEncoding("UTF-8");
+
+
+*서블릿이 값을 view에 전달하는법
+1. page
+2. request => 가장 많이 쓰임(사용 후 알아서 사라지기 때문에 사용하기 편리)
+		ex)
+		// request, session, context 중
+		// view 페이지로의 전달은 request에 담는다.
+		// 이 때 모든 객체를 Object 타입으로 캐스팅한다.
+		request.setAttribute("board", board);
+		// 어느 페이지로 이동 할 것인지를 지정.
+		RequestDispatcher view = request.getRequestDispatcher("getBoard.jsp");
+		// forword로 이동하면서 현재 사용중인 request와 response 객체를 전달. 
+		view.forward(request, response);
+
+3. session <= 연결 관계를 갖기 위한 작은 데이터 전달에만 사용
+		사용자가 로그인을 거친 후 와야하는 경우 사용		
+
+		보내는쪽
+		HttpSession session = request.getSession();
+		session.setAttribute("id", user.getId());
+
+		session.invalidate(); -> 세션 끊기
+
+		받는쪽
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id"); -> Object로 캐스팅 되어있기 때문에 다운캐스팅 해주어야 함
+
+
+4. context(project 전체)
+
+
+-----------------------쿠키-----------------------
+쿠키는 사용자의 정보를 지속적으로 유지하기 위한 벙법으로 사용됩니다.
+쿠키는 서버가 아닌 클라이언트 컴퓨터의 하드디스크에 사용자의 정보를 저장하기 때문에
+서버의 동작에 무리를 주지 않으면서 사용자의 정보를 적절하게 사용할 수 있다.
+
+-----------------------Session-----------------------
+JSP(서버)에서만 접근 가능하므로 보안 유지에 강력합니다.
+저장할 수 있는 데이터에 한계가 없습니다.
