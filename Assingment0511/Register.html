@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form name="myform" action=""  method="post" >
+		<h1 align="center" ><font face="Freshman" size="6">JOIN</font></h1><br><br>
+		<table width="50%" height="50%" border="0" align="center">
+			<tr>
+				<td>아이디</td>
+				<td><input type="text" style="border-left: none;border-right: none;border-top: none;border-bottom-color: black;" name="id" placeholder="아이디를 입력하세요" > <input
+					type="button" onclick="jbcheck()" value="중복확인">
+				<input type="text"  readonly="readonly"></td>
+			</tr>
+			<tr>
+				<td id="pw">비밀번호</td>
+				<td><input type="password" style="border-left: none;border-right: none;border-top: none;border-bottom-color: black;" name="pw"></td>
+			</tr>
+			<tr>
+				<td>비밀번호 확인</td>
+				<td><input type="password" style="border-left: none;border-right: none;border-top: none;border-bottom-color: black;" name="pw2"></td>
+			</tr>
+			<tr>
+				<td>이름</td>
+				<td><input type="text" style="border-left: none;border-right: none;border-top: none;border-bottom-color: black;" name="name"></td>
+			</tr>
+			<tr>
+				<td>성별</td>
+				<td><input type="radio" name="gender" value="M">남자&nbsp;<input
+					type="radio" name="gender" value="F">여자</td>
+			</tr>
+			<tr>
+				<td>생년월일</td>
+				<td><input type="date"  name="date"></td>
+			</tr>
+			<tr>
+				<td>이메일</td>
+				<td><input type="email" style="border-left: none;border-right: none;border-top: none;border-bottom-color: black;" name="email"></td>
+			</tr>
+			<tr>
+				<td>전화번호</td>
+				<td><input type="text" style="border-left: none;border-right: none;border-top: none;border-bottom-color: black;" name="phone" /></td>
+			</tr>
+		</table>
+		<div align="center">
+		<input type="submit" value="회원가입" > <a href="Login.html"><input type="button"
+			value="취소" ></a></div>
+	</form>
+</body>
+</html>
